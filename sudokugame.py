@@ -198,30 +198,50 @@ class Game():
 
 
 if __name__ == "__main__":
-	print("Here is a randomly generated sudoku board:")
-	game = Game()
-	game.generate_board()
-	board = game.make_blanks()
-	game.print_board(board)
-	response = input("Think you can solve it faster than my program? (type yes/no): ")
-	if response.lower().translate(str.maketrans('','',string.punctuation)) == 'yes':
-		print ("You're wrong, but I respect your confidence.")
-	elif response.lower().translate(str.maketrans('','',string.punctuation)) == 'no':
-		print ("I respect your honesty.")
-	else:
-		count = 0
-		while response.lower().translate(str.maketrans('','',string.punctuation)) != 'yes' or response.lower().translate(str.maketrans('','',string.punctuation)) == 'no':
-			if count == 5:
-				print('wow... moving on.')
-				break
-			response = input("Just type 'yes' or 'no' and lets get this over with: ")
-			count += 1
+	playagain = True
+	while playagain:
+		print("Here is a randomly generated sudoku board:")
+		game = Game()
+		game.generate_board()
+		board = game.make_blanks()
+		game.print_board(board)
+		response = input("Think you can solve it faster than my program? (type yes/no): ")
+		if response.lower().translate(str.maketrans('','',string.punctuation)) == 'yes':
+			print ("You're wrong, but I respect your confidence.")
+		elif response.lower().translate(str.maketrans('','',string.punctuation)) == 'no':
+			print ("I respect your honesty.")
+		else:
+			count = 0
+			while response != 'yes' and response != 'no':
+				if count == 5:
+					print('wow... moving on.')
+					break
+				response = input("Just type 'yes' or 'no' and lets get this over with: ")
+				count += 1
 
-	time.sleep(1)
-	print ('ready, set, solve!')
-	time.sleep(1)
-	game.solve_sudoku(board)
-	game.print_board(board)
-	print('beat you.')
+		time.sleep(1)
+		print ('ready, set, solve!')
+		time.sleep(1)
+		game.solve_sudoku(board)
+		game.print_board(board)
+		print('beat you.')
+		response = input("Want to play again? (type yes/no): ")
+		if response.lower().translate(str.maketrans('','',string.punctuation)) == 'yes':
+			print ("Sweet, let's go.")
+			time.sleep(2)
+		elif response.lower().translate(str.maketrans('','',string.punctuation)) == 'no':
+			print ("Wow, way to be a sore loser.")
+			playagain = False
+		else:
+			count = 0
+			while response.lower().translate(str.maketrans('','',string.punctuation)) != 'yes' and response.lower().translate(str.maketrans('','',string.punctuation)) != 'no':
+				if count == 5:
+					print('Okay, we are done here')
+					playagain = False
+					break
+				response = input("Just type 'yes' or 'no' please: ")
+				count += 1
+
+
 
 
